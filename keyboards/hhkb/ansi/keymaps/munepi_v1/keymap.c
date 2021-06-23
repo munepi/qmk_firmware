@@ -26,6 +26,7 @@
 enum layer_names {
     _BASE,
     _FN,
+    _RALT,
 };
 
 #define KC_FN MO(_FN)
@@ -43,9 +44,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      | Shift | Z | X | C | V | B | N | M | , | . | / | Shift | Fn0 |       |   |
      |-------+---+---+---+---+---+---+---+---+---+---+-------+-----+-------+---|
 
-            |------+------+-----------------------+------+------|
-            | LAlt | LGUI | ******* Space ******* | RGUI | RAlt |
-            |------+------+-----------------------+------+------|
+         |------+-----------+-----------------------+-----------+------|
+         | LAlt | EISU/LGUI | **** Space/Shift **** | KANA/RGUI | RAlt |
+         |------+-----------+-----------------------+-----------+------|
     */
 
     [_BASE] = LAYOUT( //  default layer
@@ -53,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC, KC_BSPC,
         KC_LCTL, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, KC_ENT,
         KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT, KC_FN,
-        KC_LALT, GUI_T(JP_MEISU), /*        */ SFT_T(KC_SPC), ALT_T(JP_MKANA), KC_RCTL),
+        KC_LALT, GUI_T(JP_MEISU), /*        */ SFT_T(KC_SPC), LT(_RALT, JP_MKANA), KC_RCTL),
 
     /* Layer _FN: HHKB mode (HHKB Fn)
       |------+-----+-----+-----+----+----+----+----+-----+-----+-----+-----+-------+-------+-----|
@@ -77,4 +78,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PSCR, KC_SLCK, KC_PAUS, KC_UP, KC_TRNS, KC_BSPC,
         KC_TRNS, KC_VOLD, KC_VOLU, KC_MUTE, KC_TRNS, KC_TRNS, KC_PAST, KC_PSLS, KC_HOME, KC_PGUP, KC_LEFT, KC_RGHT, KC_PENT,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PPLS, KC_PMNS, KC_END, KC_PGDN, KC_DOWN, KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RESET)};
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RESET),
+
+    [_RALT] = LAYOUT( //  default layer + vim-style hjkl keys with RALT
+                     RALT(KC_ESC),  RALT(KC_1), RALT(KC_2), RALT(KC_3), RALT(KC_4), RALT(KC_5), RALT(KC_6), RALT(KC_7), RALT(KC_8),    RALT(KC_9),   RALT(KC_0),    RALT(KC_MINS), RALT(KC_EQL),  RALT(KC_BSLS), RALT(KC_GRV),
+                     RALT(KC_TAB),  RALT(KC_Q), RALT(KC_W), RALT(KC_E), RALT(KC_R), RALT(KC_T), RALT(KC_Y), RALT(KC_U), RALT(KC_I),    RALT(KC_O),   RALT(KC_P),    RALT(KC_LBRC), RALT(KC_RBRC), RALT(KC_BSPC),
+                     RALT(KC_LCTL), RALT(KC_A), RALT(KC_S), RALT(KC_D), RALT(KC_F), RALT(KC_G),   KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT,   RALT(KC_SCLN), RALT(KC_QUOT), RALT(KC_ENT),
+                     RALT(KC_LSFT), RALT(KC_Z), RALT(KC_X), RALT(KC_C), RALT(KC_V), RALT(KC_B), RALT(KC_N), RALT(KC_M), RALT(KC_COMM), RALT(KC_DOT), RALT(KC_SLSH), RALT(KC_RSFT), RALT(KC_FN),
+                     KC_LALT, RALT(KC_LGUI), /*        */ RALT(KC_SPC), KC_TRNS, RALT(KC_RCTL)),
+
+};
